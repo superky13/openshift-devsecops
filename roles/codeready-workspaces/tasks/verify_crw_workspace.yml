@@ -14,7 +14,7 @@
 
 - name: Get workspace for {{ user.username }}
   uri:
-    url: 'https://{{ codeready_route|json_query("resources[0].spec.host") }}/api/workspace'
+    url: 'https://{{ codeready_route }}/api/workspace'
     validate_certs: false
     method: GET
     headers:
@@ -26,7 +26,7 @@
 - name: Verify and start workspace for {{ user.username }} again if stopped
   when: workspace_def.json[0].status == "STOPPED"
   uri:
-    url: 'https://{{ codeready_route|json_query("resources[0].spec.host") }}/api/workspace/{{ workspace_def.json[0].id }}/runtime'
+    url: 'https://{{ codeready_route }}/api/workspace/{{ workspace_def.json[0].id }}/runtime'
     validate_certs: false
     method: POST
     headers:

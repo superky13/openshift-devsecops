@@ -37,9 +37,12 @@
   retries: 10
   delay: 30
 
+- set_fact:
+    codeready_route: '{{ codeready_route|json_query("resources[0].spec.host") }}'
+
 - name: Wait for CodeReady Workspaces to respond to requests
   uri:
-    url: 'https://{{ codeready_route|json_query("resources[0].spec.host") }}/'
+    url: 'https://{{ codeready_route }}/'
     return_content: yes
     validate_certs: no
   register: codeready_endpoint
@@ -98,3 +101,11 @@
       ssoSessionMaxLifespan: 28800
     body_format: json
     status_code: 204
+
+- name: Hotload user workspaces
+  import_tasks: hotload_user.yml
+  when: hotload_crw_users
+  loop: '{{ workshop_users }}'
+  loop_control:
+    loop_var: user
+    label: '{{ user.username }}'
