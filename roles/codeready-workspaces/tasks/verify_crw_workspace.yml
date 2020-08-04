@@ -2,6 +2,7 @@
 - name: "Get Che {{ user.username }} token"
   uri:
     url: "{{ keycloak_url }}/auth/realms/codeready/protocol/openid-connect/token"
+    validate_certs: false
     method: POST
     body:
       username: "{{ user.username }}"

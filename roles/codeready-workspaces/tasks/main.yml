@@ -76,6 +76,7 @@
 - name: Get CodeReady SSO admin token
   uri:
     url: '{{ keycloak_url }}/auth/realms/master/protocol/openid-connect/token'
+    validate_certs: false
     method: POST
     body:
       username: "{{ sso_admin_user }}"
@@ -89,6 +90,7 @@
 - name: Increase CodeReady access token lifespans
   uri:
     url: '{{ keycloak_url }}/auth/admin/realms/codeready'
+    validate_certs: false
     method: PUT
     headers:
       Content-Type: application/json
