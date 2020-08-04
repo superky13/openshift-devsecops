@@ -103,7 +103,7 @@
     status_code: 204
 
 - name: Hotload user workspaces
-  import_tasks: hotload_user.yml
+  include_tasks: hotload_user.yml
   when: hotload_crw_users
   loop: '{{ workshop_users }}'
   loop_control:
