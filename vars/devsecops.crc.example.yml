@@ -39,30 +39,23 @@ github_project: jharmison-redhat
 # NOTE: Not really implemented yet....
 pipeline_style: tekton
 
-# Uncomment the following to change the actions that occur before workshop deployment
-# create_users: no      # You should only do this if you're not trying to deploy much of anything
-# autoscale: no         # You should only do this if you know your workload will fit on your cluster as is
-# adjust_console: no    # This changes the route for the console to `console.apps.<cluster_name>.<base_domain>` which is much shorter than the default.
-# deploy_ocs: no        # This OCS deployment only _currently_ works on AWS. The Tekton pipeline depends on it.
+autoscale: no             # You can't
+adjust_console: no        # You shouldn't
+deploy_ocs: no            # You can't
+deploy_service_mesh: no   # You shouldn't
+deploy_3scale: no         # You can't
+deploy_quay: no             # You shouldn't
+deploy_automated_build: no  # You shouldn't
 
 # You can disable these by uncommenting the lines below. They all default to YES.
-# deploy_quay: no
-# deploy_service_mesh: no
 # deploy_gitea: no
 # deploy_sonarqube: no
 # deploy_nexus: no
-# deploy_3scale: no
 # deploy_crw: no
 # deploy_pipeline: no
 
 # This will fail if deploy_crw=no, since the workshop dashboard depends on CodeReady Workspaces
 # deploy_workshop: no
 
-# Uncomment this line to prevent initial deployment of  the pipeline resources
-# deploy_automated_build: no
-
 # Change quay config definition to allow mirroring of image repositories
 enable_quay_repo_mirroring: yes
-
-# Uncomment this line to deploy the bookinfo application to Service Mesh and 3scale (it defaults to NO)
-# deploy_bookinfo: yes
