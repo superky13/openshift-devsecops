@@ -1,8 +1,4 @@
 ---
 - import_tasks: create_crw_user.yml
 - import_tasks: create_crw_workspace.yml
-
-# This will restart stopped workspaces, which may be valuable in another
-#   capacity, but right now results in a significant delay for little gain
-#   immediately after starting them.
-# - import_tasks: verify_crw_workspace.yml
+- import_tasks: verify_crw_workspace.yml

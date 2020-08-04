@@ -12,6 +12,7 @@
     body_format: form-urlencoded
     status_code: 200
   register: user_token
+  until: not user_token.failed
 
 - name: Get workspace for {{ user.username }}
   uri:
@@ -23,6 +24,7 @@
       Authorization: "Bearer {{ user_token.json.access_token }}"
     status_code: 200
   register: workspace_def
+  until: not workspace_def.failed
 
 - name: Verify and start workspace for {{ user.username }} again if stopped
   when: workspace_def.json[0].status == "STOPPED"
@@ -34,3 +36,5 @@
       Accept: application/json
       Authorization: "Bearer {{ user_token.json.access_token }}"
     status_code: 200
+  register: workspace_start
+  until: not workspace_start.failed
