@@ -37,4 +37,11 @@
       Authorization: "Bearer {{ user_token.json.access_token }}"
     status_code: 200
   register: workspace_start
-  until: not workspace_start.failed
+  ignore_errors: yes
+
+- name: Notify of soft failures
+  debug:
+    msg: >-
+      Unable to start the workspace. CRW for {{ user.username }} may not be
+      fully hotloaded, but this failure shouldn't be catastrophic.
+  when: workspace_start.failed
